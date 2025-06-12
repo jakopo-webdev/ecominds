@@ -26,7 +26,6 @@ import { CommonModule } from '@angular/common';
       <div class="simulation-controls">
         <button class="control-btn">Start Simulation</button>
         <button class="control-btn secondary">Reset</button>
-        <button class="control-btn secondary">Settings</button>
       </div>
     </div>
   `,
