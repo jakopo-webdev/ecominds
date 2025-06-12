@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>EcoMinds - Environmental Education Platform</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EcoMinds - An accessible environmental education platform with interactive simulations and eco-missions" />
+    <meta name="keywords" content="environmental education, accessibility, climate change, sustainability, learning" />
+    <base href="/" />
+    
+    <!-- Accessibility and SEO meta tags -->
+    <meta name="theme-color" content="#2d5a27" />
+    <meta name="color-scheme" content="light" />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body> 
+    <app-root>
+      <div style="
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #f8f9fa;
+        color: #2d5a27;
+      ">
+        <div style="text-align: center;">
+          <h1 style="font-size: 2rem; margin-bottom: 1rem;">EcoMinds</h1>
+          <p style="font-size: 1.1rem; margin-bottom: 2rem;">Loading environmental education platform...</p>
+          <div style="
+            width: 40px; 
+            height: 40px; 
+            border: 4px solid #e8f5e8; 
+            border-top: 4px solid #4caf50; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+          "></div>
+        </div>
+      </div>
+      
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    </app-root>
+  </body>
+</html>

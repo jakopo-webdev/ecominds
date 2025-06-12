@@ -1,0 +1,11 @@
+/* OpenDyslexic font-face (host or use CDN in production) */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.0/otf/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dyslexia-font {
+  font-family: 'OpenDyslexic', Arial, sans-serif !important;
+}
