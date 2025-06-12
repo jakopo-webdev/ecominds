@@ -171,6 +171,12 @@ export class AccessibilitySettingsComponent {
     } else {
       document.body.classList.remove('dyslexia-font');
     }
+    // Apply high contrast mode immediately
+    if (this.settings.highContrast) {
+      document.body.classList.add('high-contrast');
+    } else {
+      document.body.classList.remove('high-contrast');
+    }
     console.log('Settings saved:', this.settings);
     alert('Settings have been applied successfully!');
   }
@@ -186,8 +192,9 @@ export class AccessibilitySettingsComponent {
       audioDescriptions: false,
       slowAnimations: false
     };
-    // Remove dyslexia font if present
+    // Remove dyslexia font and high contrast if present
     document.body.classList.remove('dyslexia-font');
+    document.body.classList.remove('high-contrast');
     localStorage.removeItem('accessibilitySettings');
     console.log('Settings reset to default');
   }
@@ -199,6 +206,9 @@ export class AccessibilitySettingsComponent {
       this.settings = { ...this.settings, ...JSON.parse(saved) };
       if (this.settings.dyslexiaFont) {
         document.body.classList.add('dyslexia-font');
+      }
+      if (this.settings.highContrast) {
+        document.body.classList.add('high-contrast');
       }
     }
   }

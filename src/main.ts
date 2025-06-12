@@ -46,6 +46,19 @@ export class App {
     } else {
       document.body.classList.remove('dyslexia-font');
     }
+    
+    // Always apply high contrast mode if setting is enabled
+    if (saved) {
+      const settings = JSON.parse(saved);
+      if (settings.highContrast) {
+        document.body.classList.add('high-contrast');
+      } else {
+        document.body.classList.remove('high-contrast');
+      }
+    }
+    else {
+      document.body.classList.remove('high-contrast');
+    }
   }
 }
 

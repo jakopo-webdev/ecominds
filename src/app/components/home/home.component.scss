@@ -14,14 +14,15 @@
   h1 {
     font-size: 3rem;
     color: #2d5a27;
-    margin-bottom: 1rem;
+    padding: 1rem 0;
     font-weight: bold;
   }
 
   .hero-subtitle {
     font-size: 1.3rem;
     color: #4a7c59;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
     font-weight: 500;
   }
 
@@ -30,6 +31,7 @@
     color: #666;
     max-width: 600px;
     margin: 0 auto 2rem;
+    padding: 1rem;
     line-height: 1.6;
   }
 

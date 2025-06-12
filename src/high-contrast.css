@@ -1,0 +1,37 @@
+/* High Contrast Mode Styles */
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast, .high-contrast * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+}
+
+.high-contrast a, .high-contrast a:visited {
+  color: #4caf50 !important;
+}
+
+.high-contrast a.active {
+    color: #fff !important;
+    background-color: #4caf50 !important;
+}
+
+.high-contrast button, .high-contrast input, .high-contrast select, .high-contrast textarea {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.high-contrast input:checked + .checkmark {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+}
+
+.high-contrast .skip-link {
+  background: #4caf50 !important;
+  color: #000 !important;
+}
