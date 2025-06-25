@@ -30,8 +30,6 @@
 .narration-active {
   outline: 2px solid rgba(76, 175, 80, 0.8) !important;
   outline-offset: 2px !important;
-  background-color: rgba(76, 175, 80, 0.05) !important;
-  border-radius: 2px !important;
   position: relative !important;
   transition: all 0.2s ease !important;
 }
@@ -86,7 +84,6 @@ body.narration-enabled button:hover,
 body.narration-enabled label:hover {
   outline: 1px dashed rgba(76, 175, 80, 0.4) !important;
   outline-offset: 2px !important;
-  background-color: rgba(76, 175, 80, 0.01) !important;
   transition: all 0.15s ease !important;
 }
 
