@@ -151,7 +151,7 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
     highContrast: false,
     largeCursor: false,
     keyboardNavigation: false,
-    soundEffects: true,
+    soundEffects: false,
     slowAnimations: false,
   };
 
@@ -161,6 +161,12 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
     // Update settings through the service
     this.accessibilityService.updateSettings(this.settings);
     console.log("Settings saved:", this.settings);
+
+    // Play success sound if sound effects are enabled
+    if (this.settings.soundEffects) {
+      this.accessibilityService.playSuccessSound();
+    }
+
     alert("Settings have been applied successfully!");
   }
 

@@ -19,6 +19,7 @@ export class AccessibilityService {
   constructor() {
     this.loadSettings();
     this.applySettings();
+    this.initializeSoundEffects();
   }
 
   getSettings() {
@@ -69,6 +70,9 @@ export class AccessibilityService {
 
     // Apply narration mode
     this.toggleNarrationMode();
+
+    // Apply sound effects
+    this.toggleSoundEffects();
   }
 
   resetSettings() {
@@ -78,7 +82,7 @@ export class AccessibilityService {
       highContrast: false,
       largeCursor: false,
       keyboardNavigation: false,
-      soundEffects: true,
+      soundEffects: false,
       slowAnimations: false,
     };
 
@@ -87,6 +91,7 @@ export class AccessibilityService {
     document.body.classList.remove("high-contrast");
     document.body.classList.remove("large-cursor");
     this.removeNarrationListeners();
+    this.removeSoundEffects();
 
     localStorage.removeItem("accessibilitySettings");
   }
@@ -98,6 +103,14 @@ export class AccessibilityService {
     } else {
       this.removeNarrationListeners();
       document.body.classList.remove("narration-enabled");
+    }
+  }
+
+  private toggleSoundEffects() {
+    if (this.settings.soundEffects) {
+      this.addSoundEffectListeners();
+    } else {
+      this.removeSoundEffects();
     }
   }
 
@@ -289,5 +302,278 @@ export class AccessibilityService {
 
   destroy() {
     this.removeNarrationListeners();
+    this.removeSoundEffects();
+  }
+
+  // Sound Effects Methods
+  private initializeSoundEffects() {
+    if (this.settings.soundEffects) {
+      this.addSoundEffectListeners();
+    }
+  }
+
+  private addSoundEffectListeners() {
+    // Add click sound effects to interactive elements
+    document.addEventListener("click", this.handleClickSound.bind(this));
+    document.addEventListener(
+      "mouseenter",
+      this.handleHoverSound.bind(this),
+      true
+    );
+
+    // Add focus sound effects for keyboard navigation
+    document.addEventListener("focus", this.handleFocusSound.bind(this), true);
+
+    // Add form interaction sounds
+    document.addEventListener(
+      "change",
+      this.handleChangeSound.bind(this),
+      true
+    );
+  }
+
+  private removeSoundEffects() {
+    document.removeEventListener("click", this.handleClickSound.bind(this));
+    document.removeEventListener(
+      "mouseenter",
+      this.handleHoverSound.bind(this),
+      true
+    );
+    document.removeEventListener(
+      "focus",
+      this.handleFocusSound.bind(this),
+      true
+    );
+    document.removeEventListener(
+      "change",
+      this.handleChangeSound.bind(this),
+      true
+    );
+  }
+
+  private handleClickSound(event: Event) {
+    if (!this.settings.soundEffects) return;
+
+    const element = event.target as HTMLElement;
+
+    if (this.isInteractiveElement(element)) {
+      this.playSound("click", element);
+    }
+  }
+
+  private handleHoverSound(event: Event) {
+    if (!this.settings.soundEffects) return;
+
+    const element = event.target as HTMLElement;
+
+    if (this.isInteractiveElement(element) && element.tagName === "BUTTON") {
+      this.playSound("hover", element);
+    }
+  }
+
+  private handleFocusSound(event: Event) {
+    if (!this.settings.soundEffects) return;
+
+    const element = event.target as HTMLElement;
+
+    if (this.isInteractiveElement(element)) {
+      this.playSound("focus", element);
+    }
+  }
+
+  private handleChangeSound(event: Event) {
+    if (!this.settings.soundEffects) return;
+
+    const element = event.target as HTMLElement;
+
+    if (
+      element.tagName === "INPUT" ||
+      element.tagName === "SELECT" ||
+      element.tagName === "TEXTAREA"
+    ) {
+      this.playSound("change", element);
+    }
+  }
+
+  private isInteractiveElement(element: HTMLElement): boolean {
+    const interactiveTags = ["BUTTON", "A", "INPUT", "SELECT", "TEXTAREA"];
+    return (
+      interactiveTags.includes(element.tagName) ||
+      (element.hasAttribute("role") &&
+        ["button", "link", "menuitem"].includes(
+          element.getAttribute("role") || ""
+        ))
+    );
+  }
+
+  private playSound(
+    type: "click" | "hover" | "focus" | "change" | "success" | "error",
+    element?: HTMLElement
+  ) {
+    if (!this.settings.soundEffects) return;
+
+    // Create audio context for Web Audio API
+    try {
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+
+      switch (type) {
+        case "click":
+          this.playClickSound(audioContext);
+          break;
+        case "hover":
+          this.playHoverSound(audioContext);
+          break;
+        case "focus":
+          this.playFocusSound(audioContext);
+          break;
+        case "change":
+          this.playChangeSound(audioContext);
+          break;
+        case "success":
+          this.playSuccessTone(audioContext);
+          break;
+        case "error":
+          this.playErrorTone(audioContext);
+          break;
+      }
+    } catch (error) {
+      // Fallback to simple beep if Web Audio API is not available
+      console.log("Audio feedback:", type);
+    }
+  }
+
+  private playClickSound(audioContext: AudioContext) {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.1
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  }
+
+  private playHoverSound(audioContext: AudioContext) {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.05
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.05);
+  }
+
+  private playFocusSound(audioContext: AudioContext) {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.setValueAtTime(500, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.08
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.08);
+  }
+
+  private playChangeSound(audioContext: AudioContext) {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.setValueAtTime(700, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      900,
+      audioContext.currentTime + 0.1
+    );
+    gainNode.gain.setValueAtTime(0.06, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.1
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  }
+
+  private playSuccessTone(audioContext: AudioContext) {
+    // Play a pleasant ascending tone for success
+    const frequencies = [523, 659, 784]; // C, E, G notes
+
+    frequencies.forEach((freq, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.setValueAtTime(
+        freq,
+        audioContext.currentTime + index * 0.1
+      );
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime + index * 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.01,
+        audioContext.currentTime + index * 0.1 + 0.2
+      );
+
+      oscillator.start(audioContext.currentTime + index * 0.1);
+      oscillator.stop(audioContext.currentTime + index * 0.1 + 0.2);
+    });
+  }
+
+  private playErrorTone(audioContext: AudioContext) {
+    // Play a descending tone for errors
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      200,
+      audioContext.currentTime + 0.3
+    );
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.3
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.3);
+  }
+
+  // Public methods for external components to trigger sounds
+  public playSuccessSound() {
+    this.playSound("success");
+  }
+
+  public playErrorSound() {
+    this.playSound("error");
   }
 }
