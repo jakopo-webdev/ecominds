@@ -77,7 +77,7 @@ import { FormsModule } from "@angular/forms";
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Text-to-Speech Narration</strong>
-                <p>Enable audio narration for all text content</p>
+                <p>Enable audio narration when you hover over text</p>
               </div>
             </label>
           </div>

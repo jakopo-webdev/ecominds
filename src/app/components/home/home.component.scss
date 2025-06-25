@@ -5,6 +5,9 @@
 }
 
 .hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   padding: 4rem 0;
   background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
@@ -14,15 +17,17 @@
   h1 {
     font-size: 3rem;
     color: #2d5a27;
-    padding: 1rem 0;
+    padding: 1rem;
     font-weight: bold;
+    max-width: max-content;
   }
 
   .hero-subtitle {
+    max-width: max-content;
     font-size: 1.3rem;
     color: #4a7c59;
     margin-bottom: 1rem;
-    padding: 1rem 0;
+    padding: 1rem;
     font-weight: 500;
   }
 
@@ -44,7 +49,8 @@
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
       background-color: #45a049;
@@ -90,7 +96,7 @@
     h1 {
       font-size: 2rem;
     }
-    
+
     .hero-subtitle {
       font-size: 1.1rem;
     }
