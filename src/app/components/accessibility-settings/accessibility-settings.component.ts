@@ -1,41 +1,46 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: 'app-accessibility-settings',
+  selector: "app-accessibility-settings",
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
     <div class="accessibility-container">
       <h1>Accessibility Settings</h1>
-      <p class="page-description">Customize your learning experience to meet your needs</p>
-      
+      <p class="page-description">
+        Customize your learning experience to meet your needs
+      </p>
+
       <div class="settings-sections">
         <section class="settings-section">
           <h2>Visual Accessibility</h2>
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.dyslexiaFont"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Dyslexia-Friendly Font</strong>
-                <p>Use OpenDyslexic font to improve readability for users with dyslexia</p>
+                <p>
+                  Use OpenDyslexic font to improve readability for users with
+                  dyslexia
+                </p>
               </div>
             </label>
           </div>
-          
+
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.highContrast"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>High Contrast Mode</strong>
@@ -46,11 +51,11 @@ import { FormsModule } from '@angular/forms';
 
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.largeCursor"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Large Cursor</strong>
@@ -64,11 +69,11 @@ import { FormsModule } from '@angular/forms';
           <h2>Audio Accessibility</h2>
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.narrationMode"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Text-to-Speech Narration</strong>
@@ -79,11 +84,11 @@ import { FormsModule } from '@angular/forms';
 
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.soundEffects"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Sound Effects</strong>
@@ -94,11 +99,11 @@ import { FormsModule } from '@angular/forms';
 
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.audioDescriptions"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Audio Descriptions</strong>
@@ -113,11 +118,11 @@ import { FormsModule } from '@angular/forms';
 
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.keyboardNavigation"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Enhanced Keyboard Navigation</strong>
@@ -128,11 +133,11 @@ import { FormsModule } from '@angular/forms';
 
           <div class="setting-item">
             <label class="setting-label">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 [(ngModel)]="settings.slowAnimations"
                 class="setting-checkbox"
-              >
+              />
               <span class="checkmark"></span>
               <div class="setting-info">
                 <strong>Slower Animations</strong>
@@ -145,12 +150,15 @@ import { FormsModule } from '@angular/forms';
 
       <div class="settings-actions">
         <button class="save-btn" (click)="saveSettings()">Save Settings</button>
-        <button class="reset-btn" (click)="resetSettings()">Reset to Default</button>
+        <button class="reset-btn" (click)="resetSettings()">
+          Reset to Default
+        </button>
       </div>
+    </div>
   `,
-  styleUrls: ['./accessibility-settings.component.scss']
+  styleUrls: ["./accessibility-settings.component.scss"],
 })
-export class AccessibilitySettingsComponent {
+export class AccessibilitySettingsComponent implements OnInit {
   settings = {
     dyslexiaFont: false,
     narrationMode: false,
@@ -159,26 +167,35 @@ export class AccessibilitySettingsComponent {
     keyboardNavigation: false,
     soundEffects: true,
     audioDescriptions: false,
-    slowAnimations: false
+    slowAnimations: false,
   };
 
   saveSettings() {
     // Save to localStorage
-    localStorage.setItem('accessibilitySettings', JSON.stringify(this.settings));
+    localStorage.setItem(
+      "accessibilitySettings",
+      JSON.stringify(this.settings)
+    );
     // Apply dyslexia font immediately
     if (this.settings.dyslexiaFont) {
-      document.body.classList.add('dyslexia-font');
+      document.body.classList.add("dyslexia-font");
     } else {
-      document.body.classList.remove('dyslexia-font');
+      document.body.classList.remove("dyslexia-font");
     }
     // Apply high contrast mode immediately
     if (this.settings.highContrast) {
-      document.body.classList.add('high-contrast');
+      document.body.classList.add("high-contrast");
     } else {
-      document.body.classList.remove('high-contrast');
+      document.body.classList.remove("high-contrast");
     }
-    console.log('Settings saved:', this.settings);
-    alert('Settings have been applied successfully!');
+    // Apply large cursor immediately
+    if (this.settings.largeCursor) {
+      document.body.classList.add("large-cursor");
+    } else {
+      document.body.classList.remove("large-cursor");
+    }
+    console.log("Settings saved:", this.settings);
+    alert("Settings have been applied successfully!");
   }
 
   resetSettings() {
@@ -190,30 +207,34 @@ export class AccessibilitySettingsComponent {
       keyboardNavigation: false,
       soundEffects: true,
       audioDescriptions: false,
-      slowAnimations: false
+      slowAnimations: false,
     };
-    // Remove dyslexia font and high contrast if present
-    document.body.classList.remove('dyslexia-font');
-    document.body.classList.remove('high-contrast');
-    localStorage.removeItem('accessibilitySettings');
-    console.log('Settings reset to default');
+    // Remove dyslexia font, high contrast, and large cursor if present
+    document.body.classList.remove("dyslexia-font");
+    document.body.classList.remove("high-contrast");
+    document.body.classList.remove("large-cursor");
+    localStorage.removeItem("accessibilitySettings");
+    console.log("Settings reset to default");
   }
 
   ngOnInit() {
     // Load settings from localStorage if available
-    const saved = localStorage.getItem('accessibilitySettings');
+    const saved = localStorage.getItem("accessibilitySettings");
     if (saved) {
       this.settings = { ...this.settings, ...JSON.parse(saved) };
       if (this.settings.dyslexiaFont) {
-        document.body.classList.add('dyslexia-font');
+        document.body.classList.add("dyslexia-font");
       }
       if (this.settings.highContrast) {
-        document.body.classList.add('high-contrast');
+        document.body.classList.add("high-contrast");
+      }
+      if (this.settings.largeCursor) {
+        document.body.classList.add("large-cursor");
       }
     }
   }
 
   hasActiveSettings(): boolean {
-    return Object.values(this.settings).some(value => value === true);
+    return Object.values(this.settings).some((value) => value === true);
   }
 }

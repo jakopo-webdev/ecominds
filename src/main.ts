@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { RouterOutlet, provideRouter } from '@angular/router';
-import { routes } from './app/app.routes';
-import { HeaderComponent } from './app/components/shared/header/header.component';
-import { FooterComponent } from './app/components/shared/footer/footer.component';
+import { Component, OnInit } from "@angular/core";
+import { bootstrapApplication } from "@angular/platform-browser";
+import { RouterOutlet, provideRouter } from "@angular/router";
+import { routes } from "./app/app.routes";
+import { HeaderComponent } from "./app/components/shared/header/header.component";
+import { FooterComponent } from "./app/components/shared/footer/footer.component";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   template: `
@@ -18,50 +18,58 @@ import { FooterComponent } from './app/components/shared/footer/footer.component
       <app-footer></app-footer>
     </div>
   `,
-  styles: [`
-    .app-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .main-content {
-      flex: 1;
-      background-color: #f8f9fa;
-    }
-  `]
-})
+  styles: [
+    `
+      .app-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-export class App {
+      .main-content {
+        flex: 1;
+        background-color: #f8f9fa;
+      }
+    `,
+  ],
+})
+export class App implements OnInit {
   ngOnInit() {
     // Always apply dyslexia font if setting is enabled
-    const saved = localStorage.getItem('accessibilitySettings');
+    const saved = localStorage.getItem("accessibilitySettings");
     if (saved) {
       const settings = JSON.parse(saved);
       if (settings.dyslexiaFont) {
-        document.body.classList.add('dyslexia-font');
+        document.body.classList.add("dyslexia-font");
       } else {
-        document.body.classList.remove('dyslexia-font');
+        document.body.classList.remove("dyslexia-font");
       }
     } else {
-      document.body.classList.remove('dyslexia-font');
+      document.body.classList.remove("dyslexia-font");
     }
-    
+
     // Always apply high contrast mode if setting is enabled
     if (saved) {
       const settings = JSON.parse(saved);
       if (settings.highContrast) {
-        document.body.classList.add('high-contrast');
+        document.body.classList.add("high-contrast");
       } else {
-        document.body.classList.remove('high-contrast');
+        document.body.classList.remove("high-contrast");
       }
-    }
-    else {
-      document.body.classList.remove('high-contrast');
+
+      // Always apply large cursor if setting is enabled
+      if (settings.largeCursor) {
+        document.body.classList.add("large-cursor");
+      } else {
+        document.body.classList.remove("large-cursor");
+      }
+    } else {
+      document.body.classList.remove("high-contrast");
+      document.body.classList.remove("large-cursor");
     }
   }
 }
 
 bootstrapApplication(App, {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes)],
 });
