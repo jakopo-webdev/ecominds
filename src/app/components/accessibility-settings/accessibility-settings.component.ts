@@ -96,21 +96,6 @@ import { FormsModule } from "@angular/forms";
               </div>
             </label>
           </div>
-
-          <div class="setting-item">
-            <label class="setting-label">
-              <input
-                type="checkbox"
-                [(ngModel)]="settings.audioDescriptions"
-                class="setting-checkbox"
-              />
-              <span class="checkmark"></span>
-              <div class="setting-info">
-                <strong>Audio Descriptions</strong>
-                <p>Provide audio descriptions for visual content</p>
-              </div>
-            </label>
-          </div>
         </section>
 
         <section class="settings-section">
@@ -166,7 +151,6 @@ export class AccessibilitySettingsComponent implements OnInit {
     largeCursor: false,
     keyboardNavigation: false,
     soundEffects: true,
-    audioDescriptions: false,
     slowAnimations: false,
   };
 
@@ -206,7 +190,6 @@ export class AccessibilitySettingsComponent implements OnInit {
       largeCursor: false,
       keyboardNavigation: false,
       soundEffects: true,
-      audioDescriptions: false,
       slowAnimations: false,
     };
     // Remove dyslexia font, high contrast, and large cursor if present
