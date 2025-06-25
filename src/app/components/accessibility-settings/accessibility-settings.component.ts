@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { AccessibilityService } from "../../services/accessibility.service";
 
 @Component({
   selector: "app-accessibility-settings",
@@ -143,7 +144,7 @@ import { FormsModule } from "@angular/forms";
   `,
   styleUrls: ["./accessibility-settings.component.scss"],
 })
-export class AccessibilitySettingsComponent implements OnInit {
+export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   settings = {
     dyslexiaFont: false,
     narrationMode: false,
@@ -154,70 +155,32 @@ export class AccessibilitySettingsComponent implements OnInit {
     slowAnimations: false,
   };
 
+  constructor(private accessibilityService: AccessibilityService) {}
+
   saveSettings() {
-    // Save to localStorage
-    localStorage.setItem(
-      "accessibilitySettings",
-      JSON.stringify(this.settings)
-    );
-    // Apply dyslexia font immediately
-    if (this.settings.dyslexiaFont) {
-      document.body.classList.add("dyslexia-font");
-    } else {
-      document.body.classList.remove("dyslexia-font");
-    }
-    // Apply high contrast mode immediately
-    if (this.settings.highContrast) {
-      document.body.classList.add("high-contrast");
-    } else {
-      document.body.classList.remove("high-contrast");
-    }
-    // Apply large cursor immediately
-    if (this.settings.largeCursor) {
-      document.body.classList.add("large-cursor");
-    } else {
-      document.body.classList.remove("large-cursor");
-    }
+    // Update settings through the service
+    this.accessibilityService.updateSettings(this.settings);
     console.log("Settings saved:", this.settings);
     alert("Settings have been applied successfully!");
   }
 
   resetSettings() {
-    this.settings = {
-      dyslexiaFont: false,
-      narrationMode: false,
-      highContrast: false,
-      largeCursor: false,
-      keyboardNavigation: false,
-      soundEffects: true,
-      slowAnimations: false,
-    };
-    // Remove dyslexia font, high contrast, and large cursor if present
-    document.body.classList.remove("dyslexia-font");
-    document.body.classList.remove("high-contrast");
-    document.body.classList.remove("large-cursor");
-    localStorage.removeItem("accessibilitySettings");
+    // Reset settings through the service
+    this.accessibilityService.resetSettings();
+    this.settings = this.accessibilityService.getSettings();
     console.log("Settings reset to default");
   }
 
   ngOnInit() {
-    // Load settings from localStorage if available
-    const saved = localStorage.getItem("accessibilitySettings");
-    if (saved) {
-      this.settings = { ...this.settings, ...JSON.parse(saved) };
-      if (this.settings.dyslexiaFont) {
-        document.body.classList.add("dyslexia-font");
-      }
-      if (this.settings.highContrast) {
-        document.body.classList.add("high-contrast");
-      }
-      if (this.settings.largeCursor) {
-        document.body.classList.add("large-cursor");
-      }
-    }
+    // Load settings from the service
+    this.settings = this.accessibilityService.getSettings();
   }
 
   hasActiveSettings(): boolean {
     return Object.values(this.settings).some((value) => value === true);
+  }
+
+  ngOnDestroy() {
+    // Service handles cleanup globally, no need for component-level cleanup
   }
 }

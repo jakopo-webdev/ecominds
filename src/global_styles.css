@@ -14,16 +14,80 @@
 .large-cursor input,
 .large-cursor a,
 .large-cursor [role="button"] {
-  cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDFMMjIgN0wxOSAxMEwyNSAxNkwxOSAyMkwyMiAyNUwxNiAzMUwxMCAyNUwxMyAyMkw3IDE2TDEzIDEwTDEwIDdMMTYgMVoiIGZpbGw9ImJsYWNrIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+Cg==")
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDFMMjIgN0wxOSAxMEwyNSAxNkwxOSAyMkwyMiAyNUwxNiAzMUwxMCAyNUwxMyAyMkw3IDE2TDEzIDEwTDEwIDdMMTYgMVoiIGZpbGw9ImJsYWNrIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+Cg==")
       16 16,
     pointer !important;
 }
 
 .large-cursor input[type="text"],
 .large-cursor textarea {
-  cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjE2IiB5MT0iMiIgeDI9IjE2IiB5Mj0iMzAiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxsaW5lIHgxPSI2IiB5MT0iMTYiIHgyPSIyNiIgeTI9IjE2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K")
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjE2IiB5MT0iMiIgeDI9IjE2IiB5Mj0iMzAiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxsaW5lIHgxPSI2IiB5MT0iMTYiIHgyPSIyNiIgeTI9IjE2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K")
       16 16,
     text !important;
+}
+
+/* Narration mode styles */
+.narration-active {
+  outline: 2px solid rgba(76, 175, 80, 0.8) !important;
+  outline-offset: 2px !important;
+  background-color: rgba(76, 175, 80, 0.05) !important;
+  border-radius: 2px !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+}
+
+.narration-active::before {
+  content: "🔊";
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  font-size: 10px;
+  background: #4caf50;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: pulse 1s infinite;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Hover indication for narration mode */
+body.narration-enabled *:hover {
+  cursor: help !important;
+}
+
+body.narration-enabled p:hover,
+body.narration-enabled h1:hover,
+body.narration-enabled h2:hover,
+body.narration-enabled h3:hover,
+body.narration-enabled h4:hover,
+body.narration-enabled h5:hover,
+body.narration-enabled h6:hover,
+body.narration-enabled span:hover,
+body.narration-enabled div:hover,
+body.narration-enabled a:hover,
+body.narration-enabled button:hover,
+body.narration-enabled label:hover {
+  outline: 1px dashed rgba(76, 175, 80, 0.4) !important;
+  outline-offset: 2px !important;
+  background-color: rgba(76, 175, 80, 0.01) !important;
+  transition: all 0.15s ease !important;
 }
 
 /* Reset and base styles */

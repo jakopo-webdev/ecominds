@@ -4,6 +4,7 @@ import { RouterOutlet, provideRouter } from "@angular/router";
 import { routes } from "./app/app.routes";
 import { HeaderComponent } from "./app/components/shared/header/header.component";
 import { FooterComponent } from "./app/components/shared/footer/footer.component";
+import { AccessibilityService } from "./app/services/accessibility.service";
 
 @Component({
   selector: "app-root",
@@ -34,39 +35,11 @@ import { FooterComponent } from "./app/components/shared/footer/footer.component
   ],
 })
 export class App implements OnInit {
+  constructor(private accessibilityService: AccessibilityService) {}
+
   ngOnInit() {
-    // Always apply dyslexia font if setting is enabled
-    const saved = localStorage.getItem("accessibilitySettings");
-    if (saved) {
-      const settings = JSON.parse(saved);
-      if (settings.dyslexiaFont) {
-        document.body.classList.add("dyslexia-font");
-      } else {
-        document.body.classList.remove("dyslexia-font");
-      }
-    } else {
-      document.body.classList.remove("dyslexia-font");
-    }
-
-    // Always apply high contrast mode if setting is enabled
-    if (saved) {
-      const settings = JSON.parse(saved);
-      if (settings.highContrast) {
-        document.body.classList.add("high-contrast");
-      } else {
-        document.body.classList.remove("high-contrast");
-      }
-
-      // Always apply large cursor if setting is enabled
-      if (settings.largeCursor) {
-        document.body.classList.add("large-cursor");
-      } else {
-        document.body.classList.remove("large-cursor");
-      }
-    } else {
-      document.body.classList.remove("high-contrast");
-      document.body.classList.remove("large-cursor");
-    }
+    // The accessibility service automatically handles all settings on initialization
+    // No need for manual setup here anymore
   }
 }
 
