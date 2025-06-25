@@ -87,6 +87,93 @@ body.narration-enabled label:hover {
   transition: all 0.15s ease !important;
 }
 
+/* Enhanced Keyboard Navigation styles */
+.skip-links {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #2d5a27;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Enhanced focus indicators when keyboard navigation is enabled */
+body.enhanced-keyboard-nav *:focus {
+  outline: 3px solid #4caf50 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+body.enhanced-keyboard-nav button:focus,
+body.enhanced-keyboard-nav a:focus,
+body.enhanced-keyboard-nav input:focus,
+body.enhanced-keyboard-nav select:focus,
+body.enhanced-keyboard-nav textarea:focus {
+  outline: 3px solid #4caf50 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3) !important;
+  background-color: rgba(76, 175, 80, 0.05) !important;
+}
+
+/* High contrast focus indicators */
+body.enhanced-keyboard-nav.high-contrast *:focus {
+  outline: 4px solid #ffffff !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px #000000, 0 0 0 6px #ffffff !important;
+}
+
+/* Focus within containers */
+body.enhanced-keyboard-nav [role="menubar"]:focus-within,
+body.enhanced-keyboard-nav [role="menu"]:focus-within,
+body.enhanced-keyboard-nav nav:focus-within {
+  background-color: rgba(76, 175, 80, 0.02) !important;
+  border-radius: 4px !important;
+}
+
+/* Improve focus visibility for custom components */
+body.enhanced-keyboard-nav .setting-checkbox:focus + .checkmark {
+  outline: 3px solid #4caf50 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3) !important;
+}
+
+/* Navigation focus indicators */
+body.enhanced-keyboard-nav nav a:focus,
+body.enhanced-keyboard-nav .nav-link:focus {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Button focus enhancement */
+body.enhanced-keyboard-nav button:focus {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3) !important;
+}
+
+/* Form element focus enhancement */
+body.enhanced-keyboard-nav input:focus,
+body.enhanced-keyboard-nav textarea:focus,
+body.enhanced-keyboard-nav select:focus {
+  border-color: #4caf50 !important;
+  background-color: rgba(76, 175, 80, 0.03) !important;
+}
+
 /* Reset and base styles */
 * {
   margin: 0;

@@ -73,6 +73,9 @@ export class AccessibilityService {
 
     // Apply sound effects
     this.toggleSoundEffects();
+
+    // Apply keyboard navigation
+    this.toggleKeyboardNavigation();
   }
 
   resetSettings() {
@@ -92,6 +95,7 @@ export class AccessibilityService {
     document.body.classList.remove("large-cursor");
     this.removeNarrationListeners();
     this.removeSoundEffects();
+    this.removeKeyboardNavigation();
 
     localStorage.removeItem("accessibilitySettings");
   }
@@ -111,6 +115,16 @@ export class AccessibilityService {
       this.addSoundEffectListeners();
     } else {
       this.removeSoundEffects();
+    }
+  }
+
+  private toggleKeyboardNavigation() {
+    if (this.settings.keyboardNavigation) {
+      this.addKeyboardNavigation();
+      document.body.classList.add("enhanced-keyboard-nav");
+    } else {
+      this.removeKeyboardNavigation();
+      document.body.classList.remove("enhanced-keyboard-nav");
     }
   }
 
@@ -303,6 +317,7 @@ export class AccessibilityService {
   destroy() {
     this.removeNarrationListeners();
     this.removeSoundEffects();
+    this.removeKeyboardNavigation();
   }
 
   // Sound Effects Methods
@@ -575,5 +590,204 @@ export class AccessibilityService {
 
   public playErrorSound() {
     this.playSound("error");
+  }
+
+  // Keyboard Navigation Methods
+  private addKeyboardNavigation() {
+    // Add enhanced focus management
+    this.addFocusTrapping();
+    this.addSkipLinks();
+    this.improveFocusVisibility();
+  }
+
+  private removeKeyboardNavigation() {
+    // Remove enhanced focus features
+    this.removeFocusTrapping();
+    this.removeSkipLinks();
+    document.body.classList.remove("enhanced-keyboard-nav");
+  }
+
+  private addFocusTrapping() {
+    // Add keydown listener for focus management
+    document.addEventListener(
+      "keydown",
+      this.handleKeyboardNavigation.bind(this)
+    );
+  }
+
+  private removeFocusTrapping() {
+    // Remove keydown listener
+    document.removeEventListener(
+      "keydown",
+      this.handleKeyboardNavigation.bind(this)
+    );
+  }
+
+  private handleKeyboardNavigation(event: KeyboardEvent) {
+    if (!this.settings.keyboardNavigation) return;
+
+    // Handle Tab key for focus management
+    if (event.key === "Tab") {
+      this.handleTabNavigation(event);
+    }
+
+    // Handle Arrow keys for better navigation
+    if (
+      ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)
+    ) {
+      this.handleArrowNavigation(event);
+    }
+
+    // Handle Enter/Space for activation
+    if (event.key === "Enter" || event.key === " ") {
+      this.handleActivationKeys(event);
+    }
+
+    // Handle Escape for closing/canceling
+    if (event.key === "Escape") {
+      this.handleEscapeKey(event);
+    }
+  }
+
+  private handleTabNavigation(event: KeyboardEvent) {
+    const focusableElements = this.getFocusableElements();
+    const currentIndex = Array.from(focusableElements).indexOf(
+      document.activeElement as HTMLElement
+    );
+
+    if (event.shiftKey) {
+      // Shift+Tab: go to previous element
+      if (currentIndex <= 0) {
+        event.preventDefault();
+        (
+          focusableElements[focusableElements.length - 1] as HTMLElement
+        ).focus();
+      }
+    } else {
+      // Tab: go to next element
+      if (currentIndex >= focusableElements.length - 1) {
+        event.preventDefault();
+        (focusableElements[0] as HTMLElement).focus();
+      }
+    }
+  }
+
+  private handleArrowNavigation(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+
+    // Only handle arrow navigation for specific element types
+    if (
+      target.getAttribute("role") === "menubar" ||
+      target.getAttribute("role") === "menu" ||
+      target.closest('[role="menubar"]') ||
+      target.closest('[role="menu"]')
+    ) {
+      event.preventDefault();
+      const siblings = this.getSiblingFocusableElements(target);
+      const currentIndex = siblings.indexOf(target);
+
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        const nextIndex = (currentIndex + 1) % siblings.length;
+        siblings[nextIndex].focus();
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        const prevIndex =
+          currentIndex > 0 ? currentIndex - 1 : siblings.length - 1;
+        siblings[prevIndex].focus();
+      }
+    }
+  }
+
+  private handleActivationKeys(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+
+    // Handle Enter and Space for buttons and links
+    if (
+      target.tagName === "BUTTON" ||
+      target.tagName === "A" ||
+      target.getAttribute("role") === "button"
+    ) {
+      if (event.key === " ") {
+        event.preventDefault();
+        target.click();
+      }
+    }
+  }
+
+  private handleEscapeKey(event: KeyboardEvent) {
+    // Close modals, dropdowns, etc.
+    const modal = document.querySelector('[aria-modal="true"]');
+    const dropdown = document.querySelector('[aria-expanded="true"]');
+
+    if (modal) {
+      // Focus should return to the element that opened the modal
+      const trigger = modal.getAttribute("data-trigger-id");
+      if (trigger) {
+        const triggerElement = document.getElementById(trigger);
+        if (triggerElement) {
+          triggerElement.focus();
+        }
+      }
+    }
+
+    if (dropdown) {
+      dropdown.setAttribute("aria-expanded", "false");
+      (dropdown as HTMLElement).focus();
+    }
+  }
+
+  private getFocusableElements(): NodeListOf<Element> {
+    return document.querySelectorAll(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]), [contenteditable]'
+    );
+  }
+
+  private getSiblingFocusableElements(element: HTMLElement): HTMLElement[] {
+    const parent = element.parentElement;
+    if (!parent) return [element];
+
+    const siblings = Array.from(parent.children).filter((child) =>
+      this.isFocusable(child as HTMLElement)
+    );
+
+    return siblings as HTMLElement[];
+  }
+
+  private isFocusable(element: HTMLElement): boolean {
+    const focusableSelectors = [
+      "button:not([disabled])",
+      "[href]",
+      "input:not([disabled])",
+      "select:not([disabled])",
+      "textarea:not([disabled])",
+      '[tabindex]:not([tabindex="-1"])',
+      "[contenteditable]",
+    ];
+
+    return focusableSelectors.some((selector) => element.matches(selector));
+  }
+
+  private addSkipLinks() {
+    // Add skip links if they don't exist
+    if (!document.querySelector(".skip-links")) {
+      const skipLinks = document.createElement("div");
+      skipLinks.className = "skip-links";
+      skipLinks.innerHTML = `
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <a href="#navigation" class="skip-link">Skip to navigation</a>
+      `;
+      document.body.insertBefore(skipLinks, document.body.firstChild);
+    }
+  }
+
+  private removeSkipLinks() {
+    const skipLinks = document.querySelector(".skip-links");
+    if (skipLinks) {
+      skipLinks.remove();
+    }
+  }
+
+  private improveFocusVisibility() {
+    // Enhanced focus visibility is handled through CSS classes
+    // The 'enhanced-keyboard-nav' class is already added to body
   }
 }
