@@ -12,7 +12,7 @@ export class AccessibilityService {
     highContrast: false,
     largeCursor: false,
     keyboardNavigation: false,
-    soundEffects: true,
+    soundEffects: false,
     slowAnimations: false,
   };
 
