@@ -1,41 +1,38 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <div class="home-container">
       <div class="hero-section">
         <h1>Welcome to EcoMinds</h1>
-        <p class="hero-subtitle">Your gateway to environmental education and awareness</p>
-        <p class="hero-description">
-          Discover the wonders of our planet through interactive simulations and engaging eco-missions. 
-          Learn about environmental challenges and become a champion for sustainability.
-        </p>
+        <p class="hero-subtitle">Text 1: subheading</p>
+        <p class="hero-description">Text 2: description</p>
         <button class="start-button" routerLink="/simulation">
-          Start Your Journey
+          Text 3: button
         </button>
       </div>
-      
+
       <div class="features-preview">
         <div class="feature-card">
-          <h3>Interactive Simulations</h3>
-          <p>Experience environmental scenarios through engaging simulations</p>
+          <h3>Text 4</h3>
+          <p>Text 5</p>
         </div>
         <div class="feature-card">
-          <h3>Eco-Missions</h3>
-          <p>Complete missions to learn about environmental conservation</p>
+          <h3>Text 6</h3>
+          <p>Text 7</p>
         </div>
         <div class="feature-card">
-          <h3>Accessible Learning</h3>
-          <p>Customizable settings for diverse learning needs</p>
+          <h3>Text 8</h3>
+          <p>Text 9</p>
         </div>
       </div>
     </div>
   `,
-  styleUrls: ['./home.component.scss']
+  styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent {}
