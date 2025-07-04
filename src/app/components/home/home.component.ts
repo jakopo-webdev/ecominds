@@ -31,6 +31,25 @@ import { RouterModule } from "@angular/router";
           <p>Text 9</p>
         </div>
       </div>
+
+      <div class="image-gallery">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="assets/images/image-1.jpg"
+              alt="Gallery image 1"
+              class="gallery-image"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="assets/images/image-2.png"
+              alt="Gallery image 2"
+              class="gallery-image"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ["./home.component.scss"],

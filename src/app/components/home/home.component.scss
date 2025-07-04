@@ -91,6 +91,37 @@
   }
 }
 
+.image-gallery {
+  margin-top: 3rem;
+  padding: 2rem 0;
+
+  h2 {
+    text-align: center;
+    color: #2d5a27;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    text-align: center;
+
+    .gallery-image {
+      width: 100%;
+      height: 600px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     h1 {

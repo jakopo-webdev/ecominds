@@ -18,7 +18,9 @@ interface Mission {
   template: `
     <div class="missions-container">
       <h1>Eco-Missions</h1>
-      <p class="page-description">Text 13</p>
+      <p class="page-description">
+        Complete environmental missions to learn and make a difference
+      </p>
 
       <div class="missions-grid">
         <div class="mission-card" *ngFor="let mission of missions">
