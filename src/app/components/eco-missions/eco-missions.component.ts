@@ -54,57 +54,48 @@ export class EcoMissionsComponent {
   missions: Mission[] = [
     {
       id: 1,
-      title: "Water Conservation Challenge",
+      title: "🌱 Mindful Eating",
       description:
-        "Learn about water conservation techniques and implement them in your daily life",
+        "Discover the environmental impact of your diet and commit to eating a vegetarian meal for one day.",
+      difficulty: "Easy",
+      duration: "20 mins",
+      category: "Food",
+    },
+    {
+      id: 2,
+      title: "💧 Water Conservation Challenge",
+      description:
+        "Learn about water conservation techniques and implement them in your daily life.",
       difficulty: "Easy",
       duration: "15 mins",
       category: "Water",
     },
     {
-      id: 2,
-      title: "Carbon Footprint Tracker",
-      description:
-        "Calculate and reduce your carbon footprint through practical activities",
-      difficulty: "Medium",
-      duration: "30 mins",
-      category: "Climate",
-    },
-    {
       id: 3,
-      title: "Biodiversity Explorer",
+      title: "♻️ Recycling Spot Rescue",
       description:
-        "Discover local ecosystems and their importance to environmental health",
+        "Visit or research a local recycling point. Sort 10 household items correctly for recycling or reuse.",
       difficulty: "Medium",
-      duration: "25 mins",
-      category: "Wildlife",
-    },
-    {
-      id: 4,
-      title: "Renewable Energy Pioneer",
-      description:
-        "Explore different renewable energy sources and their environmental impact",
-      difficulty: "Hard",
-      duration: "45 mins",
-      category: "Energy",
-    },
-    {
-      id: 5,
-      title: "Waste Reduction Professional",
-      description:
-        "Master the art of reducing, reusing, and recycling in everyday situations",
-      difficulty: "Easy",
-      duration: "20 mins",
+      duration: "40 mins",
       category: "Waste",
     },
     {
-      id: 6,
-      title: "Sustainable Transportation",
+      id: 4,
+      title: "🏠 Green Makeover",
       description:
-        "Discover eco-friendly transportation options and their environmental benefits",
+        "Identify areas in your home where energy is being wasted and propose at least 3 practical eco-friendly upgrades.",
       difficulty: "Medium",
-      duration: "35 mins",
-      category: "Transport",
+      duration: "45 mins",
+      category: "Energy / Housing",
+    },
+    {
+      id: 5,
+      title: "🚗 MuevetEX – Move with Impact",
+      description:
+        "Explore how shared sustainable mobility can improve quality of life while supporting local businesses and reducing emissions.",
+      difficulty: "Medium",
+      duration: "40 mins",
+      category: "Sustainable Transport",
     },
   ];
 }

@@ -101,11 +101,6 @@
         margin-bottom: 0.5rem;
         border-left: 4px solid #4caf50;
         border-radius: 4px;
-
-        &:before {
-          content: "🎯 ";
-          margin-right: 0.5rem;
-        }
       }
     }
   }
@@ -151,14 +146,7 @@
 
       li {
         margin-bottom: 0.8rem;
-        padding-left: 1.5rem;
         position: relative;
-
-        &:before {
-          content: "💡";
-          position: absolute;
-          left: 0;
-        }
 
         &:last-child {
           margin-bottom: 0;

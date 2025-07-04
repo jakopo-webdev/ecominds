@@ -7,8 +7,10 @@ import { CommonModule } from "@angular/common";
   imports: [CommonModule],
   template: `
     <div class="simulation-container">
-      <h1>Text 10</h1>
-      <p class="page-description">Text 11</p>
+      <h1>Play Our Simulation</h1>
+      <p class="page-description">
+        Experience the impact of your choices on a virtual ocean ecosystem
+      </p>
 
       <div class="simulation-placeholder">
         <div class="placeholder-content">
