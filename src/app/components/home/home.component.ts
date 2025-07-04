@@ -10,25 +10,43 @@ import { RouterModule } from "@angular/router";
     <div class="home-container">
       <div class="hero-section">
         <h1>Welcome to EcoMinds</h1>
-        <p class="hero-subtitle">Text 1: subheading</p>
-        <p class="hero-description">Text 2: description</p>
+        <p class="hero-subtitle">
+          Raising awareness about the urgent need to protect our environment.
+        </p>
+        <p class="hero-description">
+          Discover the real impact of our actions on the planet, learn how to
+          reduce your ecological footprint, and become part of a community
+          committed to sustainability and caring for the Earth.
+        </p>
         <button class="start-button" routerLink="/simulation">
-          Text 3: button
+          Start your Journey
         </button>
       </div>
 
       <div class="features-preview">
         <div class="feature-card">
-          <h3>Text 4</h3>
-          <p>Text 5</p>
+          <h3>Recycling Machines</h3>
+          <p>
+            Installation of machines in public spaces where people can deposit
+            used plastic and receive rewards (discounts, digital credits, or
+            points to redeem).
+          </p>
         </div>
         <div class="feature-card">
-          <h3>Text 6</h3>
-          <p>Text 7</p>
+          <h3>Turning Waste into Beauty</h3>
+          <p>
+            Community projects that use collected plastic to create murals,
+            sculptures, and urban furniture, transforming trash into awareness
+            and beauty.
+          </p>
         </div>
         <div class="feature-card">
-          <h3>Text 8</h3>
-          <p>Text 9</p>
+          <h3>Rapid Decay Plastics</h3>
+          <p>
+            Support the development and use of plastics that break down quickly
+            with the help of natural microorganisms, reducing the time plastic
+            pollutes the environment.
+          </p>
         </div>
       </div>
 
