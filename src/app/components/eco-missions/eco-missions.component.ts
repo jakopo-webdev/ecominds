@@ -54,43 +54,57 @@ export class EcoMissionsComponent {
   missions: Mission[] = [
     {
       id: 1,
-      title: "Mission title",
-      description: "Mission description",
+      title: "Water Conservation Challenge",
+      description:
+        "Learn about water conservation techniques and implement them in your daily life",
       difficulty: "Easy",
-      duration: "XX mins",
-      category: "Category",
+      duration: "15 mins",
+      category: "Water",
     },
     {
       id: 2,
-      title: "Mission title",
-      description: "Mission description",
-      difficulty: "Easy",
-      duration: "XX mins",
-      category: "Category",
+      title: "Carbon Footprint Tracker",
+      description:
+        "Calculate and reduce your carbon footprint through practical activities",
+      difficulty: "Medium",
+      duration: "30 mins",
+      category: "Climate",
     },
     {
       id: 3,
-      title: "Mission title",
-      description: "Mission description",
-      difficulty: "Easy",
-      duration: "XX mins",
-      category: "Category",
+      title: "Biodiversity Explorer",
+      description:
+        "Discover local ecosystems and their importance to environmental health",
+      difficulty: "Medium",
+      duration: "25 mins",
+      category: "Wildlife",
     },
     {
       id: 4,
-      title: "Mission title",
-      description: "Mission description",
-      difficulty: "Easy",
-      duration: "XX mins",
-      category: "Category",
+      title: "Renewable Energy Pioneer",
+      description:
+        "Explore different renewable energy sources and their environmental impact",
+      difficulty: "Hard",
+      duration: "45 mins",
+      category: "Energy",
     },
     {
       id: 5,
-      title: "Mission title",
-      description: "Mission description",
+      title: "Waste Reduction Professional",
+      description:
+        "Master the art of reducing, reusing, and recycling in everyday situations",
       difficulty: "Easy",
-      duration: "XX mins",
-      category: "Category",
+      duration: "20 mins",
+      category: "Waste",
+    },
+    {
+      id: 6,
+      title: "Sustainable Transportation",
+      description:
+        "Discover eco-friendly transportation options and their environmental benefits",
+      difficulty: "Medium",
+      duration: "35 mins",
+      category: "Transport",
     },
   ];
 }
