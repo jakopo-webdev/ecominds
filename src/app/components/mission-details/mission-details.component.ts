@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 
 interface MissionDetail {
   id: number;
@@ -15,17 +15,22 @@ interface MissionDetail {
 }
 
 @Component({
-  selector: 'app-mission-details',
+  selector: "app-mission-details",
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <div class="mission-details-container" *ngIf="mission">
       <div class="mission-header">
-        <button class="back-btn" routerLink="/eco-missions">← Back to Missions</button>
+        <button class="back-btn" routerLink="/eco-missions">
+          ← Back to Missions
+        </button>
         <div class="mission-title-section">
           <h1>{{ mission.title }}</h1>
           <div class="mission-badges">
-            <span class="difficulty-badge" [class]="'difficulty-' + mission.difficulty.toLowerCase()">
+            <span
+              class="difficulty-badge"
+              [class]="'difficulty-' + mission.difficulty.toLowerCase()"
+            >
               {{ mission.difficulty }}
             </span>
             <span class="duration-badge">⏱️ {{ mission.duration }}</span>
@@ -43,14 +48,19 @@ interface MissionDetail {
         <section class="mission-objectives">
           <h2>Learning Objectives</h2>
           <ul>
-            <li *ngFor="let objective of mission.objectives">{{ objective }}</li>
+            <li *ngFor="let objective of mission.objectives">
+              {{ objective }}
+            </li>
           </ul>
         </section>
 
         <section class="mission-steps">
           <h2>Mission Steps</h2>
           <div class="steps-list">
-            <div class="step-item" *ngFor="let step of mission.steps; let i = index">
+            <div
+              class="step-item"
+              *ngFor="let step of mission.steps; let i = index"
+            >
               <div class="step-number">{{ i + 1 }}</div>
               <div class="step-content">{{ step }}</div>
             </div>
@@ -77,7 +87,7 @@ interface MissionDetail {
       <button routerLink="/eco-missions">Back to Missions</button>
     </div>
   `,
-  styleUrls: ['./mission-details.component.scss']
+  styleUrls: ["./mission-details.component.scss"],
 })
 export class MissionDetailsComponent implements OnInit {
   mission: MissionDetail | null = null;
@@ -85,64 +95,22 @@ export class MissionDetailsComponent implements OnInit {
   private missions: MissionDetail[] = [
     {
       id: 1,
-      title: "Water Conservation Challenge",
-      description: "Learn about water conservation techniques and implement them in your daily life to make a positive environmental impact.",
+      title: "Mission title",
+      description:
+        "Mission description goes here. It should provide a brief overview of what the mission entails and its significance in environmental education.",
       difficulty: "Easy",
-      duration: "15 mins",
-      category: "Water",
-      objectives: [
-        "Understand the importance of water conservation",
-        "Learn practical water-saving techniques",
-        "Calculate your water usage and potential savings",
-        "Create a personal water conservation plan"
-      ],
-      steps: [
-        "Complete the water usage assessment quiz",
-        "Watch the interactive water cycle demonstration",
-        "Learn about 5 key water conservation techniques",
-        "Practice implementing techniques in virtual scenarios",
-        "Create your personalized water conservation checklist"
-      ],
-      tips: [
-        "Focus on one technique at a time for better retention",
-        "Take notes during the demonstration for reference",
-        "Don't worry if you don't get everything right the first time",
-        "The quiz can be retaken to improve your score"
-      ]
+      duration: "XX mins",
+      category: "Category",
+      objectives: ["Objective 1", "Objective 2", "Objective 3", "Objective 4"],
+      steps: ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
+      tips: ["Tip 1", "Tip 2", "Tip 3", "Tip 4"],
     },
-    {
-      id: 2,
-      title: "Carbon Footprint Tracker",
-      description: "Calculate and reduce your carbon footprint through practical activities and learn about climate impact.",
-      difficulty: "Medium",
-      duration: "30 mins",
-      category: "Climate",
-      objectives: [
-        "Understand what carbon footprint means",
-        "Learn to calculate personal carbon emissions",
-        "Discover reduction strategies",
-        "Create an action plan for carbon reduction"
-      ],
-      steps: [
-        "Complete the carbon footprint calculator",
-        "Analyze your results and identify high-impact areas",
-        "Explore carbon reduction strategies",
-        "Practice making eco-friendly choices in scenarios",
-        "Design your personal carbon reduction plan"
-      ],
-      tips: [
-        "Be honest in the calculator for accurate results",
-        "Focus on changes that fit your lifestyle",
-        "Small consistent changes make a big difference",
-        "Track your progress over time"
-      ]
-    }
   ];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.mission = this.missions.find(m => m.id === id) || null;
+    const id = Number(this.route.snapshot.paramMap.get("id"));
+    this.mission = this.missions.find((m) => m.id === id) || null;
   }
 }

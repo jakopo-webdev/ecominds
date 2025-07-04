@@ -19,8 +19,12 @@ import { RouterModule } from "@angular/router";
           <li>
             <a routerLink="/simulation" routerLinkActive="active">Simulation</a>
           </li>
-          <!-- <li><a routerLink="/eco-missions" routerLinkActive="active">Eco-Missions</a></li>
-          <li><a routerLink="/accessibility-settings" routerLinkActive="active">Accessibility</a></li>
+          <li>
+            <a routerLink="/eco-missions" routerLinkActive="active"
+              >Eco-Missions</a
+            >
+          </li>
+          <!-- <li><a routerLink="/accessibility-settings" routerLinkActive="active">Accessibility</a></li>
           <li><a routerLink="/about-us" routerLinkActive="active">About Us</a></li> -->
         </ul>
       </nav>
