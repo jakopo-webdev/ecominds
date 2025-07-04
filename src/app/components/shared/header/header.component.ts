@@ -24,7 +24,11 @@ import { RouterModule } from "@angular/router";
               >Eco-Missions</a
             >
           </li>
-          <!-- <li><a routerLink="/accessibility-settings" routerLinkActive="active">Accessibility</a></li>-->
+          <li>
+            <a routerLink="/accessibility-settings" routerLinkActive="active"
+              >Accessibility</a
+            >
+          </li>
           <li>
             <a routerLink="/about-us" routerLinkActive="active">About Us</a>
           </li>
