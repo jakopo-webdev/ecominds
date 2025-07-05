@@ -116,21 +116,6 @@ import { AccessibilityService } from "../../services/accessibility.service";
               </div>
             </label>
           </div>
-
-          <div class="setting-item">
-            <label class="setting-label">
-              <input
-                type="checkbox"
-                [(ngModel)]="settings.slowAnimations"
-                class="setting-checkbox"
-              />
-              <span class="checkmark"></span>
-              <div class="setting-info">
-                <strong>Slower Animations</strong>
-                <p>Reduce animation speed for better comprehension</p>
-              </div>
-            </label>
-          </div>
         </section>
       </div>
 
@@ -152,7 +137,6 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
     largeCursor: false,
     keyboardNavigation: false,
     soundEffects: false,
-    slowAnimations: false,
   };
 
   constructor(private accessibilityService: AccessibilityService) {}

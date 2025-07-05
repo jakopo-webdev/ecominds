@@ -13,7 +13,6 @@ export class AccessibilityService {
     largeCursor: false,
     keyboardNavigation: false,
     soundEffects: false,
-    slowAnimations: false,
   };
 
   constructor() {
@@ -86,7 +85,6 @@ export class AccessibilityService {
       largeCursor: false,
       keyboardNavigation: false,
       soundEffects: false,
-      slowAnimations: false,
     };
 
     // Remove all accessibility classes
